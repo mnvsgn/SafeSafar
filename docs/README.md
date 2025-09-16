@@ -114,20 +114,62 @@ Enable tourists to travel with confidence across India through cutting-edge tech
 
 ```mermaid
 graph TB
-   A[Mobile App<br/>React Native] <--> B[API Gateway<br/>Node.js/Express]
-   B <--> C[Microservices Layer]
-   C --> D[Auth Service]
-   C --> E[Digital ID Service]
-   C --> F[Geo-fencing Service]
-   C --> G[Emergency Service]
-   C --> H[AI/ML Service]
-   B <--> I[Blockchain Ledger]
-   B <--> J[Law Enforcement Dashboard<br/>React.js]
-   
-   style A fill:#e1f5fe
-   style B fill:#f3e5f5
-   style I fill:#fff3e0
-   style J fill:#e8f5e8
+    subgraph "Client Layer"
+        MA[Mobile App<br/>React Native]
+        WD[Web Dashboard<br/>React.js]
+        LE[Law Enforcement<br/>Portal]
+    end
+    
+    subgraph "API Gateway"
+        AG[API Gateway<br/>Load Balancer<br/>Rate Limiting]
+    end
+    
+    subgraph "Microservices"
+        AS[Auth Service]
+        DIS[Digital ID Service]
+        GS[Geo-fencing Service]
+        ES[Emergency Service]
+        AML[AI/ML Service]
+        MS[Multilingual Service]
+        NS[Notification Service]
+    end
+    
+    subgraph "Data Layer"
+        BC[Blockchain<br/>Hyperledger Fabric]
+        MDB[(MongoDB<br/>User Data)]
+        RDS[(Redis<br/>Cache)]
+        ES_DB[(Elasticsearch<br/>Analytics)]
+    end
+    
+    subgraph "External APIs"
+        GM[Google Maps API]
+        WA[Weather API]
+        SMS[SMS Gateway]
+        PUSH[Push Notifications]
+    end
+    
+    MA --> AG
+    WD --> AG
+    LE --> AG
+    AG --> AS
+    AG --> DIS
+    AG --> GS
+    AG --> ES
+    AG --> AML
+    AG --> MS
+    AG --> NS
+    
+    AS --> MDB
+    DIS --> BC
+    GS --> MDB
+    ES --> MDB
+    AML --> ES_DB
+    MS --> RDS
+    
+    GS --> GM
+    ES --> SMS
+    NS --> PUSH
+    AML --> WA
 ```
 
 ---
